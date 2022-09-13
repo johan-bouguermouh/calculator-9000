@@ -1,33 +1,18 @@
 import React from 'react'
 import Touch from './util/touchableComponent'
 
-export default function AmazingNumberButton({getData, numberPending}) {
-  const [value, setvalue] = React.useState('')
+export default function AmazingNumberButton({getData}) {
 
   function incrementValue(valueTouch){
 
-    let lastValue = value
-    console.log('NUMBER PENDING IN',numberPending)
 
     if(valueTouch === "←")
     {
-      const newValue = lastValue.substring(0, lastValue.length - 1)
-      console.log(newValue)
-      setvalue(newValue)
+      getData('back')
     }
-    else if(numberPending === '0'){
-      console.log('IN NUMBER PENDINGS')
-      setvalue(valueTouch)
-    }
-    else setvalue(lastValue += valueTouch);
+    else getData(valueTouch)
   }
 
-  React.useEffect(
-    () => {
-    getData(value)
-    }
-    ,[value]
-  )
 
   return (
     <div className='amazingNumberButtonPad'>
